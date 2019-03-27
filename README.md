@@ -1,6 +1,6 @@
 ## Introduction
 Welcome to the simple go web app!
-Theres a couple of things you will need to do before you can deploy this application.
+Theres a couple of things you will need to do before you can deploy this application. Inspiration for this came from https://github.com/grisha/hello-go-ecs-terraform 
 
 ## prerequisites
 
@@ -41,4 +41,4 @@ once completed you will see that your app is up and running
 ##TODO
 - verify that app runs correctly on ecs
 - setup code build and code deploy to build the docker container and deploy TF
-- use docker-compose.yml as a starting base to add DB support to the app. Use something like https://github.com/jinzhu/gorm to log User-Agent	header 
+- use docker-compose.yml as a starting base to add DB support to the app. Use something like https://github.com/jinzhu/gorm to log User-Agent	header
