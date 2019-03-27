@@ -1,0 +1,32 @@
+version: "3"
+
+volumes:
+  pgdata:
+
+networks:
+  simple_go_network:
+    external: true
+
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - "pgdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: test12345
+      POSTGRES_USER: go_admin
+      POSTGRES_DB: godb
+    networks:
+      - simple_go_network
+
+  app:
+    build: .
+    ports:
+      - 8080
+    environment:
+      PGHOST: db
+      PGUSER: go_admin
+      PGPASSWORD: godb
+    networks:
+      - simple_go_network
