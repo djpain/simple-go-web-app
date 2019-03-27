@@ -31,3 +31,14 @@ docker push <your-ecr-url>/simple-go-web-app:latest
 ## terraform deploy
 
 make sure you are in the tf directory and have run `terraform init` to import the required modules.
+
+Once ready we can run a TF plan to see whats created
+```
+terraform plan -var key_name=$keyname -var dockerimg=<ecr-registry>/simple-go-web-app:latest -input=false -out=plan
+```
+once completed you will see that your app is up and running
+
+##TODO
+- verify that app runs correctly on ecs
+- setup code build and code deploy to build the docker container and deploy TF
+- use docker-compose.yml as a starting base to add DB support to the app. Use something like https://github.com/jinzhu/gorm to log User-Agent	header 

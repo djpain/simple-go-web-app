@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "ecs_task" {
 
 resource "aws_elb" "service_elb" {
   name                      = "${var.appname}-${var.environ}"
-  subnets                   = ["${split(",", module.vpc.public_subnets)}"]
+  subnets                   = ["${module.vpc.public_subnets}"]
   connection_draining       = true
   cross_zone_load_balancing = true
 
@@ -79,10 +79,8 @@ resource "aws_iam_instance_profile" "ecs" {
 resource "aws_launch_configuration" "ecs_cluster" {
   name                        = "${var.appname}_cluster_conf_${var.environ}"
   instance_type               = "t2.micro"
-  image_id                    = "${lookup(var.ami, var.aws_region)}"
+  image_id                    = "${var.ami}"
   iam_instance_profile        = "${aws_iam_instance_profile.ecs.id}"
-  associate_public_ip_address = true
-
   security_groups = [
     "${aws_security_group.allow_all_ssh.id}",
     "${aws_security_group.allow_all_outbound.id}",
@@ -95,7 +93,8 @@ resource "aws_launch_configuration" "ecs_cluster" {
 
 resource "aws_autoscaling_group" "ecs_cluster" {
   name                 = "${var.appname}_${var.environ}"
-  vpc_zone_identifier  = ["${split(",", module.vpc.public_subnets)}"]
+  availability_zones   = "${var.azs}"
+  vpc_zone_identifier  = ["${module.vpc.public_subnets}"]
   min_size             = 0
   max_size             = 3
   desired_capacity     = 3

@@ -7,14 +7,17 @@ variable "appname" {
 }
 
 variable "azs" {
-  default = ["ap-southeast-2a","ap-southeast-2b"]
+  default = ["ap-southeast-2a", "ap-southeast-2b"]
 }
+
 variable "public_subnets" {
-  default = ["10.100.101.0/24","10.100.102.0/24"]
+  default = ["10.100.101.0/24", "10.100.102.0/24"]
 }
+
 variable "cidr" {
   default = "10.100.0.0/16"
 }
+
 variable "privateip" {
   default = ["114.76.212.230/32"]
 }
@@ -42,8 +45,5 @@ variable "dockerimg" {}
 # From https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
 variable "ami" {
   description = "AWS ECS AMI id"
-
-  default = {
-    ap-southeast-2 = "ami-0d28e5e0f13248294"
-  }
+  default = "ami-0d28e5e0f13248294"
 }
