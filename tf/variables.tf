@@ -7,10 +7,16 @@ variable "appname" {
 }
 
 variable "azs" {
-  default = "ap-southeast-2a,ap-southeast-2b"
+  default = ["ap-southeast-2a","ap-southeast-2b"]
+}
+variable "public_subnets" {
+  default = ["10.100.101.0/24","10.100.102.0/24"]
+}
+variable "cidr" {
+  default = "10.100.0.0/16"
 }
 variable "privateip" {
-  default = "114.76.212.230/32"
+  default = ["114.76.212.230/32"]
 }
 
 variable "host_port" {

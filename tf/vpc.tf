@@ -1,9 +1,15 @@
 module "vpc" {
-  source         = "github.com/terraform-community-modules/tf_aws_vpc"
+  source         = "terraform-aws-modules/vpc/aws"
   name           = "${var.appname}-${var.environ}-vpc"
-  cidr           = "10.100.0.0/16"
-  public_subnets = "10.100.101.0/24,10.100.102.0/24"
+  cidr           = "${var.cidr}"
+  public_subnets = "${var.public_subnets}"
   azs            = "${var.azs}"
+
+  tags {
+    "Name"        = "${var.appname}"
+    "terraform"   = "true"
+    "environment" = "${var.environ}"
+  }
 }
 
 resource "aws_security_group" "allow_all_outbound" {

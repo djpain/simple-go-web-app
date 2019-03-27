@@ -4,8 +4,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 resource "template_file" "task_definition" {
-  depends_on = ["null_resource.docker"]
-  template   = "${file("task-definition.json.tmpl")}"
+  template = "${file("task-definition.json.tmpl")}"
 
   vars {
     name        = "${var.appname}_${var.environ}"
